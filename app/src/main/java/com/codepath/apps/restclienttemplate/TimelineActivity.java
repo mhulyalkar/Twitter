@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -26,10 +29,26 @@ public class TimelineActivity extends AppCompatActivity {
     RecyclerView rvTweets;
     List<Tweet> tweets;
     TweetsAdapter adapter;
+    Button btn_logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+        btn_logout = findViewById(R.id.btn_logout);
+        btn_logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                client.clearAccessToken();
+
+                // navigate backwards to Login screen
+                Intent i = new Intent(TimelineActivity.this, LoginActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // this makes sure the Back button won't work
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); // same as above
+                startActivity(i);
+            }
+        });
 
         client = TwitterApp.getRestClient(this);
 
@@ -38,7 +57,7 @@ public class TimelineActivity extends AppCompatActivity {
         //init the list of tweets and adapter
         tweets = new ArrayList<>();
         adapter = new TweetsAdapter(this, tweets);
-        //recycler view setup: leyout manager and adapter
+        //recycler view setup: layout manager and adapter
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
         rvTweets.setAdapter(adapter);
         populateHomeTimeline();
