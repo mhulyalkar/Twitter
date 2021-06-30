@@ -67,10 +67,11 @@ public class TimelineActivity extends AppCompatActivity {
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.i(TAG, "success");
+                Log.i(TAG, "success "+json.toString()+statusCode);
                 JSONArray jsonArray = json.jsonArray;
                 try {
                     tweets.addAll(Tweet.formJsonArray(jsonArray));
+                    Log.i(TAG, tweets.toString());
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     Log.i(TAG, "JSON exception", e);
