@@ -14,14 +14,14 @@ import java.util.Locale;
 
 public class Tweet {
     //private modifier from last Code Review
-    private String body;
-    private String createdAt;
-    private User user;
-    //private modifier from last Code Review
     private static final int SECOND_MILLIS = 1000;
     private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
+    //private modifier from last Code Review
+    private String body;
+    private String createdAt;
+    private User user;
 
     public static String getRelativeTimeAgo(String rawJsonDate) {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
@@ -56,18 +56,6 @@ public class Tweet {
         return "";
     }
 
-    public String getBody() {
-        return body;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {
         Tweet tweet = new Tweet();
         tweet.body = jsonObject.getString("text");
@@ -82,5 +70,17 @@ public class Tweet {
             tweets.add(fromJson(jsonArray.getJSONObject(i)));
         }
         return tweets;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
     }
 }
