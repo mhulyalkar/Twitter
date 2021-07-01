@@ -30,37 +30,22 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         this.context = context;
         this.tweets = tweets;
     }
-
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_tweet, parent, false);
         return new ViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        //Get the data at position
         final Tweet tweet = tweets.get(position);
-        //Bind the tweet with the ViewHolder
         holder.bind(tweet);
     }
-
-
     @Override
     public int getItemCount() {
         return tweets.size();
     }
-
-    //Pass in the context and list of tweets
-
-    //for each row, inflate the layout
-
-    //Bind values based on the position of the element
-
-    // Define a viewholder
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
@@ -70,19 +55,16 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvBody = itemView.findViewById(R.id.tvBody);
             tvScreenName = itemView.findViewById(R.id.tvScreenName);
         }
-
         public void bind(Tweet tweet) {
-            tvBody.setText(tweet.body);
-            tvScreenName.setText(tweet.user.screenName + " * " + tweet.createdAt);
-            Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
+            tvBody.setText(tweet.getBody());
+            tvScreenName.setText(tweet.getUser().screenName + " * " + tweet.getCreatedAt());
+            Glide.with(context).load(tweet.getUser().profileImageUrl).into(ivProfileImage);
         }
     }
     public void clear() {
         tweets.clear();
         notifyDataSetChanged();
     }
-
-    // Add a list of items -- change to type used
     public void addAll(List<Tweet> list) {
         tweets.addAll(list);
         notifyDataSetChanged();

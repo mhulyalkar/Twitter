@@ -11,6 +11,14 @@ import com.codepath.apps.restclienttemplate.models.SampleModel;
 import com.codepath.apps.restclienttemplate.models.SampleModelDao;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
+/**
+ * Screen to Log into twitter.
+ * app/src/main/java/com.codepath.apps.restclienttemplate/LoginActivity
+ *
+ * @author miguelhulyalkar
+ * @version 1.0
+ */
+
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	//private modifier from last Code Review
 	private SampleModelDao sampleModelDao;
@@ -45,7 +53,6 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	// i.e Display application "homepage"
 	@Override
 	public void onLoginSuccess() {
-		Log.i("rerer", "login success");
 		Intent i = new Intent(this, TimelineActivity.class);
 		startActivity(i);
 	}

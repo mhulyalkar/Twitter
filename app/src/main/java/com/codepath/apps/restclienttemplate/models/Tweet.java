@@ -13,10 +13,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class Tweet {
-    public String body;
-    public String createdAt;
-    public User user;
-
+    //private modifier from last Code Review
+    private String body;
+    private String createdAt;
+    private User user;
+    //private modifier from last Code Review
     private static final int SECOND_MILLIS = 1000;
     private static final int MINUTE_MILLIS = 60 * SECOND_MILLIS;
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
@@ -53,6 +54,18 @@ public class Tweet {
         }
 
         return "";
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     public static Tweet fromJson(JSONObject jsonObject) throws JSONException {

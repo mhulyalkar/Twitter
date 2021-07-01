@@ -18,9 +18,18 @@ import org.json.JSONException;
 
 import okhttp3.Headers;
 
+/**
+ * Screen to type a new tweet.
+ * app/src/main/java/com.codepath.apps.restclienttemplate/ComposeActivity
+ *
+ * @author miguelhulyalkar
+ * @version 1.0
+ */
+
 public class ComposeActivity extends AppCompatActivity {
-    public static final int MAX_TWEET_LENGTH = 140;
-    public static final String TAG = "CompositeActivity";
+    //private modifier from last Code Review
+    private static final int MAX_TWEET_LENGTH = 140;
+    private static final String TAG = "CompositeActivity";
     EditText etCompose;
     Button btnTweet;
 
@@ -40,7 +49,6 @@ public class ComposeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String tweetContent = etCompose.getText().toString();
-                Log.i("tweetContent", tweetContent);
                 if (tweetContent.isEmpty()) {
                     Toast.makeText(ComposeActivity.this, "Sorry, your tweet cannot be empty", Toast.LENGTH_LONG).show();
                     return;
@@ -52,12 +60,8 @@ public class ComposeActivity extends AppCompatActivity {
                 client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        Log.i(TAG, "publish success");
-
                         try {
-                            //TODO: declare final?
                             Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG, "published tweet says: " + tweet.body);
                             Intent intent = new Intent();
                             intent.putExtra("tweet", (Parcelable) tweet);
                             finish();
