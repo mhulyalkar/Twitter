@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -21,8 +21,10 @@ import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder> {
 
-    Context context;
-    List<Tweet> tweets;
+    //private modifier from last Code Review
+    private Context context;
+    private List<Tweet> tweets;
+    private SwipeRefreshLayout swipeContainer;
 
     public TweetsAdapter(Context context, List<Tweet> tweets) {
         this.context = context;
@@ -74,5 +76,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvScreenName.setText(tweet.user.screenName);
             Glide.with(context).load(tweet.user.profileImageUrl).into(ivProfileImage);
         }
+    }
+    public void clear() {
+        tweets.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Tweet> list) {
+        tweets.addAll(list);
+        notifyDataSetChanged();
     }
 }

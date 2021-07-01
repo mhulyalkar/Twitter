@@ -12,8 +12,8 @@ import com.codepath.apps.restclienttemplate.models.SampleModelDao;
 import com.codepath.oauth.OAuthLoginActionBarActivity;
 
 public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
-
-	SampleModelDao sampleModelDao;
+	//private modifier from last Code Review
+	private SampleModelDao sampleModelDao;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
