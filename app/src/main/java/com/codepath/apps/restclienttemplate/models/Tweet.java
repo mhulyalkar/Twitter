@@ -22,6 +22,7 @@ public class Tweet {
     private String body;
     private String createdAt;
     private User user;
+    private String mediaUrl;
 
     public static String getRelativeTimeAgo(String rawJsonDate) {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
@@ -61,12 +62,18 @@ public class Tweet {
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = getRelativeTimeAgo(jsonObject.getString("created_at"));
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        JSONObject jj = jsonObject.getJSONObject("entities");
+        if (jj.has("media")) {
+            JSONArray jj2 = jj.getJSONArray("media");
+            tweet.mediaUrl = jj2.getJSONObject(0).getString("media_url_https");
+        }
+        
         return tweet;
     }
 
     public static List<Tweet> formJsonArray(JSONArray jsonArray) throws JSONException {
         List<Tweet> tweets = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
+        for (int i = 0; i < jsonArray.length() - 1; i++) {
             tweets.add(fromJson(jsonArray.getJSONObject(i)));
         }
         return tweets;
@@ -82,5 +89,8 @@ public class Tweet {
 
     public String getCreatedAt() {
         return createdAt;
+    }
+    public String getMediaUrl() {
+        return mediaUrl;
     }
 }

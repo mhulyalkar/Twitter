@@ -163,6 +163,7 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 JSONArray jsonArray = json.jsonArray;
+                Log.i(TAG, String.valueOf(jsonArray));
                 try {
                     tweets.addAll(Tweet.formJsonArray(jsonArray));
                     adapter.notifyDataSetChanged();
