@@ -51,19 +51,18 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_timeline);
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer = findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 fetchTimelineAsync(0);
             }
         });
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
         //Setting up the log out button
-        setContentView(R.layout.activity_timeline);
         btn_logout = findViewById(R.id.btn_logout);
         btn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +97,7 @@ public class TimelineActivity extends AppCompatActivity {
                 JSONArray jsonArray = json.jsonArray;
                 try {
                     adapter.addAll(Tweet.formJsonArray(jsonArray));
+                    Log.i("TAG", String.valueOf(tweets));
                 } catch (JSONException e) {
                     Log.i(TAG, "JSON exception", e);
                 }

@@ -5,10 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".TimelineActivity">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvTweets"
@@ -20,7 +21,7 @@
         android:id="@+id/btn_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rvTweets"
-        android:layout_marginTop="5dp"
+        android:layout_below="@id/swipeContainer"
+        android:layout_marginTop="-50dp"
         android:text="Log Out" />
 </RelativeLayout>
