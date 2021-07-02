@@ -47,7 +47,7 @@ Bars separating tweets
 
 Here's a walkthrough of implemented user stories:
 
-<img src='TwitterAppWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='TwitterApp2Walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [Kap](https://getkap.co/).
 
